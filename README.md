@@ -1,5 +1,17 @@
 # 🎓 Laureandosi - Sistema di Gestione Prospetti di Laurea
 
+![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
+![WordPress](https://img.shields.io/badge/WordPress-21759B?style=for-the-badge&logo=wordpress&logoColor=white)
+![JSON](https://img.shields.io/badge/JSON-000000?style=for-the-badge&logo=json&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+
+![PhpStorm](https://img.shields.io/badge/PhpStorm-000000?style=for-the-badge&logo=phpstorm&logoColor=white)
+![Local by Flywheel](https://img.shields.io/badge/Local_by_Flywheel-50B848?style=for-the-badge)
+![Visual Paradigm](https://img.shields.io/badge/Visual_Paradigm-D22A2A?style=for-the-badge)
+![Mermaid](https://img.shields.io/badge/Mermaid-FF3670?style=for-the-badge)
+
 Un sistema completo per l'automazione, il calcolo e la generazione dei prospetti di laurea per le commissioni e i candidati. 
 
 Progetto realizzato per l'esame di **Ingegneria del Software** (Prof. Mario G. Cimino) presso il Dipartimento di Ingegneria dell'Informazione dell'**Università di Pisa** (A.A. 2025-2026).
