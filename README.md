@@ -23,7 +23,7 @@ Il sistema finale, sviluppato in PHP come tema/modulo per WordPress, si interfac
 
 ## 📂 Struttura del Repository
 
-\`\`\`text
+```text
 📦 Laureandosi
  ┣ 📂 classi/                # Core logic: DTO, Calcolatori voto e Generatori PDF
  ┣ 📂 config/                # File JSON: cdl, filtri, esami_informatici, TestOutput
@@ -37,7 +37,7 @@ Il sistema finale, sviluppato in PHP come tema/modulo per WordPress, si interfac
  ┣ 📜 index.php              # Entry point e Interfaccia Grafica (UI)
  ┣ 📜 style.css              # Fogli di stile
  ┗ 📜 Laureandosi.vpp        # File sorgente Visual Paradigm
-\`\`\`
+```
 
 ---
 
@@ -87,4 +87,4 @@ Il software è pacchettizzato come tema per WordPress. Per testarlo in locale:
 > ⚠️ **Nota per il testing:** Assicurati di inserire i file JSON mockati di anagrafica e carriera in `dati_laureandi/` come specificato nel *Manuale di Installazione* (pag. 19 della documentazione).
 
 ---
-*Progetto sviluppato da [Alessio Buoncristiani](https://github.com/alessiobuoncristiani)*
+*Progetto sviluppato da [Alessio Buoncristiani](https://github.com/alessio-buoncristiani)*
