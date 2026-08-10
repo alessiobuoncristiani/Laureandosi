@@ -1,79 +1,90 @@
 # 🎓 Laureandosi - Sistema di Gestione Prospetti di Laurea
 
-[![Stack](https://img.shields.io/badge/Stack-PHP%20%7C%20WordPress%20%7C%20JSON-blue)](#)
-[![IDE](https://img.shields.io/badge/IDE-PhpStorm-purple)](#)
-[![Tools](https://img.shields.io/badge/Tools-Local_by_Flywheel-green)](#)
-[![Design](https://img.shields.io/badge/Design-Visual_Paradigm%20%7C%20Mermaid-orange)](#)
+Un sistema completo per l'automazione, il calcolo e la generazione dei prospetti di laurea per le commissioni e i candidati. 
 
-**Laureandosi** è un progetto completo di Ingegneria del Software sviluppato per l'Anno Accademico 2025-2026 presso l'Università di Pisa, sotto la docenza del Prof. Mario G. Cimino. 
-
-L'obiettivo del progetto non è stato unicamente lo sviluppo del software, ma l'applicazione rigorosa del metodo **Unified Process (UP)** in tutte le fasi del ciclo di vita dell'applicativo: dall'ingegnerizzazione dei requisiti, passando per l'analisi e il design (tramite diagrammi UML), fino all'implementazione e al collaudo.
-
-Il prodotto finale è un "Generatore Prospetti di Laurea" sviluppato in PHP per ambiente WordPress. Il sistema si interfaccia con le API di Ateneo per estrarre l'anagrafica e la carriera degli studenti (in formato JSON), calcola le medie ponderate applicando regole specifiche per ogni corso di laurea e genera dinamicamente i documenti PDF ufficiali per le sedute di laurea, inviandoli in automatico agli studenti.
+Progetto realizzato per l'esame di **Ingegneria del Software** (Prof. Mario G. Cimino) presso il Dipartimento di Ingegneria dell'Informazione dell'**Università di Pisa** (A.A. 2025-2026).
 
 ---
 
-## 🛠️ Architettura e Metodologia
+## 📖 Panoramica del Progetto
+L'obiettivo del progetto è stato l'applicazione rigorosa del metodo **Unified Process (UP)** in tutte le fasi del ciclo di vita del software: dall'ingegnerizzazione dei requisiti (tramite MoSCoW method), passando per l'analisi (Visual Paradigm) e il design (Mermaid), fino all'implementazione e al collaudo (Unit Testing).
 
-Il sistema è stato progettato garantendo modularità, rispetto della privacy (GDPR) e completa separazione tra logica di calcolo, dati e presentazione.
+Il sistema finale, sviluppato in PHP come tema/modulo per WordPress, si interfaccia con le API di Ateneo per estrarre anagrafiche e carriere (in JSON), calcola le medie ponderate applicando regole specifiche per ogni corso e genera dinamicamente i PDF ufficiali per le sedute di laurea, inviandoli automaticamente agli studenti via email.
 
-*   **Metodologia:** Unified Process (UP) con analisi dei requisiti funzionali tramite metodo MoSCoW (Must, Should, Could, Want).
-*   **Modellazione UML:** L'intera architettura (Casi d'Uso, Analisi CRC, Diagrammi di Classe, Sequenza e Dislocazione) è stata documentata utilizzando **Visual Paradigm** e **Mermaid**.
-*   **Linguaggio & IDE:** Sviluppo backend in **PHP** tramite l'IDE **PhpStorm**.
-*   **Ambiente di Deploy:** Integrazione nativa in ambiente **WordPress**, testata e messa in produzione su server locale tramite **Local (by Flywheel)**.
-*   **Formato Interscambio:** Lettura ed elaborazione asincrona di dati in formato **JSON**.
+## 🛠️ Tecnologie e Strumenti
+*   **Backend & Logica:** PHP (Sviluppato su IDE PhpStorm)
+*   **Ambiente di Produzione:** WordPress (Local by Flywheel)
+*   **Modellazione Analisi:** Visual Paradigm (Casi d'uso, CRC, Classi, Sequenza)
+*   **Modellazione Progetto:** Mermaid (Diagrammi di classe e sequenza di progetto)
+*   **Librerie Esterne:** FPDF (Generazione PDF), PHPMailer (Gestione invio email)
+*   **Formato Dati:** JSON (Configurazioni, API Ateneo, Unit Test)
+
+---
+
+## 📂 Struttura del Repository
+
+\`\`\`text
+📦 Laureandosi
+ ┣ 📂 classi/                # Core logic: DTO, Calcolatori voto e Generatori PDF
+ ┣ 📂 config/                # File JSON: cdl, filtri, esami_informatici, TestOutput
+ ┣ 📂 dati_laureandi/        # Dati JSON mockati delle carriere (per testing locale)
+ ┣ 📂 Documenti Laureandosi/ # Documentazione completa (Requisiti, Use Cases, Manuali)
+ ┣ 📂 js/                    # Logica frontend (script.js per UI asincrona)
+ ┣ 📂 lib/                   # Librerie esterne (FPDF, PHPMailer)
+ ┣ 📂 Prospetti_Correnti/    # Cartella di output temporanea (Privacy by design)
+ ┣ 📂 test/                  # Ambiente visivo di Unit Test (prevenzione regressioni)
+ ┣ 📜 api.php                # Endpoint per la comunicazione col frontend
+ ┣ 📜 index.php              # Entry point e Interfaccia Grafica (UI)
+ ┣ 📜 style.css              # Fogli di stile
+ ┗ 📜 Laureandosi.vpp        # File sorgente Visual Paradigm
+\`\`\`
 
 ---
 
 ## 🎯 Funzionalità Principali
 
-*   **Integrazione Dati:** Prelievo automatico delle carriere (esami, CFU, date) dal sistema esterno "Gestione Carriera Studente".
-*   **Motore di Calcolo Dinamico:** Algoritmi per il calcolo della media pesata e del voto di base. Il sistema gestisce eccezioni specifiche, come l'isolamento degli esami informatici (ING-INF/05) per il CdL in Ingegneria Informatica o lo scarto dell'esame peggiore per il calcolo del bonus temporale.
-*   **Generazione PDF:** Creazione di due tipologie di documenti:
-    *   *Prospetto Commissione:* Documento riassuntivo contenente tutti i candidati e una tabella previsionale con le proiezioni del voto di laurea in base ai punti assegnabili (Parametri Tesi e Commissione).
-    *   *Prospetto Laureando:* Documento individuale generato e inviato automaticamente all'email istituzionale dello studente.
-*   **Privacy by Design:** Il sistema è "stateless" per quanto riguarda i dati sensibili: elabora le carriere in RAM, genera i documenti ed elimina automaticamente i file al termine di ogni sessione, conformemente al GDPR.
+*   **Integrazione Dati (API):** Prelievo asincrono delle carriere (esami, CFU, date) dal sistema esterno "Gestione Carriera Studente".
+*   **Motore di Calcolo Dinamico:** Calcolo della media pesata e del voto base. Gestisce eccezioni avanzate come:
+    *   *Filtri custom:* Esclusione di esami sovrannumerari o extracurriculari.
+    *   *Bonus Temporale:* Scarto dell'esame peggiore per studenti in corso.
+    *   *Media di Settore:* Isolamento degli esami informatici (ING-INF/05) per Ingegneria Informatica.
+*   **Generazione PDF:** 
+    *   *Prospetto Commissione:* Documento aggregato con tabelle previsionali del voto di laurea (Parametri Tesi e Commissione variabili per CdL).
+    *   *Prospetto Laureando:* Documento individuale generato e allegato automaticamente all'email istituzionale.
+*   **Privacy by Design (GDPR):** Architettura *stateless*. Le carriere vengono elaborate in RAM e i PDF generati vengono distrutti automaticamente a fine sessione.
 
 ---
 
-## ⚙️ File di Configurazione (Sistema Flessibile)
+## ⚙️ Configurazione Zero-Code
 
-L'applicativo è progettato per essere scalabile e configurabile dall'Amministratore senza necessità di alterare il codice sorgente (Zero-Code Maintenance). Tutte le logiche di business risiedono nella directory `/config/`:
-
-*   `cdl.json`: Definisce i Corsi di Laurea supportati, il numero di CFU totali necessari e le formule matematiche parametriche (es. `M*3+18+T+C`) per la generazione delle tabelle di simulazione.
-*   `filtri.json`: Gestisce l'esclusione di specifici esami dal calcolo della media o dai crediti curriculari (es. esami extracurriculari). Supporta regole globali (wildcard `*`) o eccezioni per singola matricola.
-*   `esami_informatici.json`: Un dizionario aggiornabile contenente le nomenclature esatte degli esami validi per il calcolo della "Media Informatica".
+L'applicativo è progettato per essere scalabile dall'Amministratore senza alterare il codice PHP. Le logiche di business risiedono in `config/`:
+*   `cdl.json`: Definisce i Corsi di Laurea, i CFU necessari e le formule matematiche parametriche (es. `M*3+18+T+C`).
+*   `filtri.json`: Regole di esclusione esami (sia globali con wildcard `*`, sia per singola matricola).
+*   `esami_informatici.json`: Dizionario aggiornabile degli esami validi per la "Media Informatica".
 
 ---
 
 ## 🧪 Ambiente di Collaudo (Unit Test)
 
-Il progetto integra un ambiente di Unit Test visivo, progettato per prevenire regressioni matematiche quando l'Amministratore modifica i file di configurazione o le regole di calcolo.
-
-*   Accedendo all'endpoint `/?test`, il sistema carica il file `TestExpectedOutput.json`, che contiene i risultati matematici certificati (ATT - Atteso) per specifiche matricole di prova.
-*   Il motore di calcolo elabora le carriere a runtime (CAL - Calcolato) e restituisce una dashboard visiva con l'esito dei test (OK verde se i valori coincidono, FAIL rosso in caso di discrepanze).
-
----
-
-## 📖 Documentazione Allegata
-
-Tutto il processo di ingegneria del software è ampiamente documentato nel file **`Buoncristiani.pdf`** incluso nel repository. Il documento comprende:
-1. Analisi dei Requisiti (Funzionali e Non Funzionali) e Glossario.
-2. Modelli di Analisi (Diagrammi Use Case, Specifiche, CRC Cards).
-3. Modelli di Progetto (Diagrammi delle Classi, Sequenza, Dislocazione).
-4. Manualistica completa (Manuale Utente, Installazione, Configurazione e Test).
+Il sistema include un motore di Unit Test integrato per prevenire regressioni matematiche a seguito di modifiche ai file di configurazione.
+*   Navigando sull'endpoint `/?test`, il sistema carica `TestExpectedOutput.json` (contenente casi di test certificati).
+*   Vengono confrontati a runtime i valori Calcolati (CAL) con quelli Attesi (ATT).
+*   Restituisce una dashboard visiva immediata: **OK** (verde) o **FAIL** (rosso).
 
 ---
 
 ## 🚀 Installazione e Avvio Rapido
 
-Il sistema è pacchettizzato come tema/modulo per WordPress. Per testarlo in ambiente locale:
+Il software è pacchettizzato come tema per WordPress. Per testarlo in locale:
 
 1. Installa [Local by Flywheel](https://localwp.com/) e crea un nuovo sito WordPress vuoto.
-2. Dal pannello di Local, apri la *Site folder* e naviga nel percorso: `app/public/wp-content/themes/`.
-3. Incolla all'interno di questa cartella l'intero progetto "Laureandosi".
-4. Avvia il sito da Local e accedi alla dashboard di amministrazione (`WP Admin`).
-5. Spostati nella sezione **Aspetto > Temi** e clicca su **Attiva** nel riquadro corrispondente a *Laureandosi*.
-6. Visita la homepage del sito per accedere all'interfaccia operativa dell'Unità Didattica.
+2. Dal pannello di Local, clicca su *Site folder* e naviga in: `app/public/wp-content/themes/`.
+3. Clona o incolla questo repository rinominando la cartella in `Laureandosi`.
+4. Avvia il sito e accedi alla dashboard di amministrazione (`WP Admin`).
+5. Vai in **Aspetto > Temi** e clicca su **Attiva** sul riquadro *Laureandosi*.
+6. Vai alla homepage del sito per utilizzare l'interfaccia dell'Unità Didattica.
 
-*(Nota: per il corretto funzionamento, assicurarsi di inserire nella directory apposita i file JSON di anagrafica e carriera mockati, come descritto nel Manuale di Installazione).*
+> ⚠️ **Nota per il testing:** Assicurati di inserire i file JSON mockati di anagrafica e carriera in `dati_laureandi/` come specificato nel *Manuale di Installazione* (pag. 19 della documentazione).
+
+---
+*Progetto sviluppato da [Alessio Buoncristiani](https://github.com/alessiobuoncristiani)*
