@@ -1,0 +1,49 @@
+{
+  "dataLaurea": "2023-01-04",
+  "matricole": {
+    "123456": {
+      "matr": "123456",
+      "cdl": "T. Ing. Informatica",
+      "nome": "GIANLUIGI",
+      "cognome": "DONNARUMMA",
+      "expected": {
+        "media": 23.690,
+        "cfuTotali": 177,
+        "cfuMedia": 174,
+        "bonus": false,
+        "mediaInf": 23.750
+      }
+    },
+    "234567": {
+      "matr": "234567",
+      "cdl": "M. Ing. Elettronica",
+      "nome": "ALESSANDRO",
+      "cognome": "BASTONI",
+      "expected": {
+        "media": 24.559,
+        "cfuTotali": 102,
+        "cfuMedia": 102
+      }
+    },
+    "345678": {
+      "matr": "345678",
+      "cdl": "T. Ing. Informatica",
+      "nome": "NICCOLO",
+      "cognome": "BARELLA",
+      "expected": {
+        "media": 25.564,
+        "cfuTotali": 177,
+        "cfuMedia": 165,
+        "bonus": true,
+        "mediaInf": 25.750
+      }
+    },
+    "567890": {
+      "matr": "567890",
+      "cdl": "M. Cybersecurity",
+      "nome": "FRANCESCO",
+      "cognome": "ACERBI",
+      "shouldFail": true
+    }
+  }
+}
